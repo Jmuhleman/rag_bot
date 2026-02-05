@@ -131,7 +131,7 @@ if query:
     with st.spinner("Searching..."):
         qvecs, model = embed_texts([query])
         index = get_index(dimension=len(qvecs[0]))
-        results = index.query(vector=qvecs[0], top_k=10, include_metadata=True)
+        results = index.query(vector=qvecs[0], top_k=15, include_metadata=True)
     st.subheader("Top Matches")
     
     context_chunks = []
