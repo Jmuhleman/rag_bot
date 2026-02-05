@@ -13,7 +13,7 @@ if load_dotenv:
 
 
 st.set_page_config(page_title="Posez une question sur le document que vous avez televersé", layout="centered")
-st.title("Posez une question sur le document que vous avez televersé")
+st.title("Posez une question sur le document que vous avez téléversé")
 
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY", "")
 PINECONE_INDEX = os.getenv("PINECONE_INDEX", "test")
