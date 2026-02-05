@@ -53,6 +53,19 @@ def embed_texts(texts):
     return [v.tolist() for v in vectors], EMBEDDING_MODEL
 
 
+def rerank(query: str, chunks: list[str], top_k: int = 5) -> list[str]:
+    from sentence_transformers import CrossEncoder
+
+    if not chunks:
+        return []
+    model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+    pairs = [(query, c) for c in chunks]
+    scores = model.predict(pairs)
+    ranked = sorted(zip(chunks, scores), key=lambda x: x[1], reverse=True)
+    return [c for c, _ in ranked[:top_k]]
+
+
+
 def answer_with_llm(question: str, context: str) -> str:
     from openai import OpenAI
 
@@ -145,6 +158,7 @@ if query:
         st.write(text)
     
     if context_chunks:
+        context_chunks = rerank(query, context_chunks, top_k=5)
         st.subheader("Answer")
         with st.spinner("Generating answer..."):
             context = "\n\n---\n\n".join(context_chunks)
