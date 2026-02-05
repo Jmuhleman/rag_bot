@@ -12,8 +12,8 @@ if load_dotenv:
     load_dotenv()
 
 
-st.set_page_config(page_title="Minimal PDF + Pinecone", layout="centered")
-st.title("PooC RAG")
+st.set_page_config(page_title="Coach en entretien d'embauche", layout="centered")
+st.title("Pose moi des questions sur les entretien pour une bonne préparation")
 st.write(
     "Query Pinecone directly or upload a PDF to index. "
     "If your index already has data, you can skip the upload."
