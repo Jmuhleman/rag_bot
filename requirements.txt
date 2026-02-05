@@ -1,0 +1,6 @@
+streamlit==1.30.0
+pypdf>=4.0.0
+pinecone>=5.0.0
+openai>=1.0.0
+sentence-transformers>=2.7.0
+pyreadline3>=3.5.0
