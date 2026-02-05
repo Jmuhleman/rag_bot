@@ -29,7 +29,7 @@ if not PINECONE_API_KEY:
 if not OPENROUTER_API_KEY:
     st.error("Missing OPENROUTER_API_KEY environment variable.")
     st.stop()
-def chunk_text(text: str, chunk_size: int = 800, overlap: int = 100):
+def chunk_text(text: str, chunk_size: int = 400, overlap: int = 80):
     if chunk_size <= overlap:
         raise ValueError("chunk_size must be > overlap")
     chunks = []
