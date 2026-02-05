@@ -14,10 +14,7 @@ if load_dotenv:
 
 st.set_page_config(page_title="Coach en entretien d'embauche", layout="centered")
 st.title("Pose moi des questions sur les entretien pour une bonne préparation")
-st.write(
-    "Query Pinecone directly or upload a PDF to index. "
-    "If your index already has data, you can skip the upload."
-)
+
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY", "")
 PINECONE_INDEX = os.getenv("PINECONE_INDEX", "test")
 PINECONE_CLOUD = os.getenv("PINECONE_CLOUD", "aws")
