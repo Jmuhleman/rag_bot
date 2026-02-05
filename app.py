@@ -141,8 +141,8 @@ if query:
         text = match.get("metadata", {}).get("text", "")
         if text:
             context_chunks.append(text)
-        #st.markdown(f"**Score:** {score:.4f}")
-        #st.write(text)
+        st.markdown(f"**Score:** {score:.4f}")
+        st.write(text)
     
     if context_chunks:
         st.subheader("Answer")
