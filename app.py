@@ -79,6 +79,15 @@ def extract_sectioned_chunks(text: str) -> list[dict]:
     for ln in lines:
         if not ln:
             continue
+        # Case: "9.1 Effectuer un reset du réseau" on one line
+        m_inline = re.match(r"^(\d+(\.\d+)*)(\s+)(.+)$", ln)
+        if m_inline:
+            flush_buffer()
+            buffer = []
+            current_section = m_inline.group(1)
+            current_title = m_inline.group(4).strip()
+            pending_section = ""
+            continue
         # Matches section numbers like "9.1" or "10" on their own line
         if re.match(r"^\d+(\.\d+)*$", ln):
             # New section starts; flush previous buffer
@@ -194,6 +203,10 @@ if uploaded_file is not None:
 
     chunks = extract_sectioned_chunks(raw_text)
     st.caption(f"Chunks: {len(chunks)}")
+    with st.expander("Debug: sample chunks", expanded=False):
+        for i, item in enumerate(chunks[:8], start=1):
+            st.markdown(f"**Chunk {i}**")
+            st.text(item["text"][:1000])
 
     if st.button("Index in Pinecone"):
         with st.spinner("Embedding and upserting..."):
